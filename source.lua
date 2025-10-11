@@ -16,6 +16,7 @@ ProtectGui(ScreenGui);
 
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 ScreenGui.Parent = CoreGui;
+ScreenGui.Name = "Library"
 
 local Toggles = {};
 local Options = {};
@@ -32,7 +33,7 @@ local Library = {
     FontColor = Color3.fromRGB(255, 255, 255);
     MainColor = Color3.fromRGB(28, 28, 28);
     BackgroundColor = Color3.fromRGB(20, 20, 20);
-    AccentColor = Color3.fromRGB(0, 85, 255);
+    AccentColor = Color3.fromRGB(184, 255, 240);
     OutlineColor = Color3.fromRGB(50, 50, 50);
     RiskColor = Color3.fromRGB(255, 50, 50),
 
@@ -1860,7 +1861,7 @@ do
             Position = UDim2.new(1, 6, 0, 0);
             TextSize = 14;
             Text = Info.Text;
-            TextXAlignment = Enum.TextXAlignment.Left;
+            TextXAlignment = Info.TextAling or Enum.TextXAlignment.Left;
             ZIndex = 6;
             Parent = ToggleInner;
         });
@@ -3024,14 +3025,39 @@ function Library:CreateWindow(...)
         BackgroundColor3 = 'BackgroundColor';
     });
 
-    local TabArea = Library:Create('Frame', {
-        BackgroundTransparency = 1;
-        Position = UDim2.new(0, 8, 0, 8);
-        Size = UDim2.new(1, -16, 0, 21);
-        ZIndex = 1;
-        Parent = MainSectionInner;
-    });
+    -- local TabArea = Library:Create('Frame', {
+    --     BackgroundTransparency = 1;
+    --     Position = UDim2.new(0, 8, 0, 8);
+    --     Size = UDim2.new(1, -16, 0, 21);
+    --     ZIndex = 1;
+    --     Parent = MainSectionInner;
+    -- });
+    local TabArea = Instance.new("ScrollingFrame")
+    TabArea.Name = "ScrollingFrame"
+    TabArea.Parent = MainSectionInner 
+    TabArea.Position = UDim2.new(0.8, 0, 0.8, 0)
+    TabArea.Size = UDim2.new(1, -16, 0, 21)
+    TabArea.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
+    TabArea.BackgroundTransparency = 1
+    TabArea.BorderColor3 = Color3.fromRGB(27, 42, 53)
+    TabArea.ZIndex = 1
+    TabArea.Archivable = true
+    TabArea.ClipsDescendants = true
+    TabArea.Selectable = true
+    TabArea.SelectionGroup = true
 
+    -- Scrolling properties
+    TabArea.AutomaticCanvasSize = Enum.AutomaticSize.X
+    TabArea.ElasticBehavior = Enum.ElasticBehavior.WhenScrollable
+    TabArea.MidImage = "rbxasset://textures/ui/ScrollBarMid.png"
+    TabArea.TopImage = "rbxasset://textures/ui/ScrollBarTop.png"
+    TabArea.BottomImage = "rbxasset://textures/ui/ScrollBarBottom.png"
+    TabArea.ScrollBarImageColor3 = Color3.fromRGB(255, 255, 255)
+    TabArea.ScrollBarImageTransparency = 1
+    TabArea.ScrollBarThickness = 0
+    TabArea.ScrollingDirection = Enum.ScrollingDirection.XY
+    TabArea.ScrollingEnabled = true
+    TabArea.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Right
     local TabListLayout = Library:Create('UIListLayout', {
         Padding = UDim.new(0, Config.TabPadding);
         FillDirection = Enum.FillDirection.Horizontal;
@@ -3111,11 +3137,35 @@ function Library:CreateWindow(...)
             Parent = TabContainer;
         });
 
+        -- local TabFrame = Library:Create('ScrollingFrame', {
+        --     BackgroundTransparency = 1;
+        --     Position = UDim2.new(0, 0, 0, 0);
+        --     Size = UDim2.new(1, 0, 1, 0);
+        --     Visible = false;
+        --     ZIndex = 2;
+        --     ScrollBarImageTransparency = 0;
+        --     ScrollBarThickness = 5;
+        --     Parent = TabContainer;
+        -- });
+        -- local Sized = 0
+        -- table.insert(Library.Signals, TabFrame.ChildAdded:Connect(function(v)
+        --     table.insert(Library.Signals, v.ChildAdded:Connect(function(v)
+        --         if v:IsA("UIListLayout") then
+        --             table.insert(Library.Signals, v:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+        --                 if v.AbsoluteContentSize.Y > Sized then
+        --                     Sized = v.AbsoluteContentSize.Y
+        --                     TabFrame.CanvasSize = UDim2.fromOffset(0,v.AbsoluteContentSize.Y + 10)
+        --                 end
+        --             end))
+        --         end;
+        --     end))
+        -- end))
+
         local LeftSide = Library:Create('ScrollingFrame', {
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
             Position = UDim2.new(0, 8 - 1, 0, 8 - 1);
-            Size = UDim2.new(0.5, -12 + 2, 0, 507 + 2);
+            Size = UDim2.new(0.5, -12 + 2, 0, Config.Size.Y.Offset - 89);
             CanvasSize = UDim2.new(0, 0, 0, 0);
             BottomImage = '';
             TopImage = '';
@@ -3128,7 +3178,7 @@ function Library:CreateWindow(...)
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
             Position = UDim2.new(0.5, 4 + 1, 0, 8 - 1);
-            Size = UDim2.new(0.5, -12 + 2, 0, 507 + 2);
+            Size = UDim2.new(0.5, -12 + 2, 0, Config.Size.Y.Offset - 89);
             CanvasSize = UDim2.new(0, 0, 0, 0);
             BottomImage = '';
             TopImage = '';
@@ -3520,6 +3570,45 @@ function Library:CreateWindow(...)
         if Toggled then
             -- A bit scuffed, but if we're going from not toggled -> toggled we want to show the frame immediately so that the fade is visible.
             Outer.Visible = true;
+
+        --     task.spawn(function()
+        --         -- TODO: add cursor fade?
+        --         local State = InputService.MouseIconEnabled;
+
+        --         local Cursor = Drawing.new('Triangle');
+        --         Cursor.Thickness = 1;
+        --         Cursor.Filled = true;
+        --         Cursor.Visible = true;
+
+        --         local CursorOutline = Drawing.new('Triangle');
+        --         CursorOutline.Thickness = 1;
+        --         CursorOutline.Filled = false;
+        --         CursorOutline.Color = Color3.new(0, 0, 0);
+        --         CursorOutline.Visible = true;
+
+        --         while Toggled and ScreenGui.Parent do
+        --             InputService.MouseIconEnabled = false;
+
+        --             local mPos = InputService:GetMouseLocation();
+
+        --             Cursor.Color = Library.AccentColor;
+
+        --             Cursor.PointA = Vector2.new(mPos.X, mPos.Y);
+        --             Cursor.PointB = Vector2.new(mPos.X + 16, mPos.Y + 6);
+        --             Cursor.PointC = Vector2.new(mPos.X + 6, mPos.Y + 16);
+
+        --             CursorOutline.PointA = Cursor.PointA;
+        --             CursorOutline.PointB = Cursor.PointB;
+        --             CursorOutline.PointC = Cursor.PointC;
+
+        --             RenderStepped:Wait();
+        --         end;
+
+        --         InputService.MouseIconEnabled = State;
+
+        --         Cursor:Remove();
+        --         CursorOutline:Remove();
+        --     end);
         end;
 
         for _, Desc in next, Outer:GetDescendants() do
@@ -3568,7 +3657,7 @@ function Library:CreateWindow(...)
             if Input.UserInputType == Enum.UserInputType.Keyboard and Input.KeyCode.Name == Library.ToggleKeybind.Value then
                 task.spawn(Library.Toggle)
             end
-        elseif Input.KeyCode == Enum.KeyCode.RightControl or (Input.KeyCode == Enum.KeyCode.RightShift and (not Processed)) then
+        elseif Input.KeyCode == Enum.KeyCode.RightControl or (_G.Keybind and Input.KeyCode.Name == _G.Keybind) or (Input.KeyCode == Enum.KeyCode.RightShift and (not Processed)) then
             task.spawn(Library.Toggle)
         end
     end))
