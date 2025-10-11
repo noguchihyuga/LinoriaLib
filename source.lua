@@ -3035,7 +3035,7 @@ function Library:CreateWindow(...)
     local TabArea = Instance.new("ScrollingFrame")
     TabArea.Name = "ScrollingFrame"
     TabArea.Parent = MainSectionInner 
-    TabArea.Position = UDim2.new(0.8, 0, 0.8, 0)
+    -- TabArea.Position = UDim2.new(0.8, 0, 0.8, 0)
     TabArea.Size = UDim2.new(1, -16, 0, 21)
     TabArea.BackgroundColor3 = Color3.fromRGB(163, 162, 165)
     TabArea.BackgroundTransparency = 1
@@ -3058,6 +3058,7 @@ function Library:CreateWindow(...)
     TabArea.ScrollingDirection = Enum.ScrollingDirection.XY
     TabArea.ScrollingEnabled = true
     TabArea.VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Right
+    TabArea.CanvasSize = UDim2.new(0,0,0,0)
     local TabListLayout = Library:Create('UIListLayout', {
         Padding = UDim.new(0, Config.TabPadding);
         FillDirection = Enum.FillDirection.Horizontal;
