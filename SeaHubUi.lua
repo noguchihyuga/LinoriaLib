@@ -2544,7 +2544,7 @@ function Library:CreateWindow(Setting)
 
 end
 
-Library.CreateNoti({
+Library.Notify({
 	Title = 'UI Library',
 	Desc = 'The UI automatically hides once executed.\nPress the button at the bottom-left of the screen to show the GUI.',
 	ShowTime = 10
