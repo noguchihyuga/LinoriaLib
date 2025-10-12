@@ -489,7 +489,7 @@ function Library:Notify(Setting, bypass)
 	end
 end
 
-function Library.CreateMain(Setting)
+function Library:CreateWindow(Setting)
 
 	local TitleNameMain =  "Blox Fruit"
 	getgenv().MainDesc = Setting.Desc or ""
@@ -544,7 +544,7 @@ function Library.CreateMain(Setting)
 	local colorG = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-	TextLabelMain.Text = "<font color=\"rgb(" .. color .. ")\">Crystal Hub</font> " .. getgenv().MainDesc
+	TextLabelMain.Text = "<font color=\"rgb(" .. color .. ")\">@noguchi.hyuga</font> " .. getgenv().MainDesc or " - Blox Fruit"
 
 	MainContainer = Instance.new("ImageLabel")
 	MainContainer.Name = "MainContainer"
