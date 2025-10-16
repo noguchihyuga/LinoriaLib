@@ -1,7 +1,3 @@
---discord.gg/boronide, code generated using luamin.js™
-
-
-
 
 if getgenv().Crystal then 
 	if game.CoreGui:FindFirstChild("Crystal Hub GUI") then
@@ -20,7 +16,7 @@ local T1UIColor = {
 	["Border Color"] = Color3.fromRGB(255, 64, 64),
 	["Click Effect Color"] = Color3.fromRGB(230, 230, 230),
 	["Setting Icon Color"] = Color3.fromRGB(230, 230, 230),
-	["Logo Image"] = "http://www.roblox.com/asset/?id=98976281849470",
+	["Logo Image"] = "rbxassetid://135300070242371",
 	["Search Icon Color"] = Color3.fromRGB(255, 255, 255),
 	["Search Icon Highlight Color"] = Color3.fromRGB(255, 64, 64),
 	["GUI Text Color"] = Color3.fromRGB(230, 230, 230),
@@ -56,35 +52,35 @@ local T1UIColor = {
 
 
 local IndexUIColor = {
-	["Border Color"] = Color3.fromRGB(184, 212, 255),
+	["Border Color"] = Color3.fromRGB(171, 171, 255),
 	["Click Effect Color"] = Color3.fromRGB(230, 230, 230),
 	["Setting Icon Color"] = Color3.fromRGB(230, 230, 230),
-	["Logo Image"] = "rbxassetid://129781592728096",
+	["Logo Image"] = "rbxassetid://135300070242371",
 	["Search Icon Color"] = Color3.fromRGB(255, 255, 255),
-	["Search Icon Highlight Color"] = Color3.fromRGB(184, 212, 255),
+	["Search Icon Highlight Color"] = Color3.fromRGB(171, 171, 255),
 	["GUI Text Color"] = Color3.fromRGB(230, 230, 230),
 	["Text Color"] = Color3.fromRGB(230, 230, 230),
 	["Placeholder Text Color"] = Color3.fromRGB(178, 178, 178),
-	["Title Text Color"] = Color3.fromRGB(184, 212, 255),
+	["Title Text Color"] = Color3.fromRGB(171, 171, 255),
 	["Background Main Color"] = Color3.fromRGB(43, 43, 43),
 	["Background 1 Color"] = Color3.fromRGB(43, 43, 43),
 	["Background 1 Transparency"] = 0,
 	["Background 2 Color"] = Color3.fromRGB(90, 90, 90),
 	["Background 3 Color"] = Color3.fromRGB(53, 53, 53),
 	["Background Image"] = "",
-	["Page Selected Color"] = Color3.fromRGB(184, 212, 255),
-	["Section Text Color"] = Color3.fromRGB(184, 212, 255),
-	["Section Underline Color"] = Color3.fromRGB(184, 212, 255),
-	["Toggle Border Color"] = Color3.fromRGB(184, 212, 255),
+	["Page Selected Color"] = Color3.fromRGB(171, 171, 255),
+	["Section Text Color"] = Color3.fromRGB(171, 171, 255),
+	["Section Underline Color"] = Color3.fromRGB(171, 171, 255),
+	["Toggle Border Color"] = Color3.fromRGB(171, 171, 255),
 	["Toggle Checked Color"] = Color3.fromRGB(230, 230, 230),
 	["Toggle Desc Color"] = Color3.fromRGB(185, 185, 185),
-	["Button Color"] = Color3.fromRGB(184, 212, 255),
+	["Button Color"] = Color3.fromRGB(171, 171, 255),
 	["Label Color"] = Color3.fromRGB(138, 189, 255),
 	["Dropdown Icon Color"] = Color3.fromRGB(230, 230, 230),
-	["Dropdown Selected Color"] = Color3.fromRGB(184, 212, 255),
+	["Dropdown Selected Color"] = Color3.fromRGB(171, 171, 255),
 	["Dropdown Selected Check Color"] = Color3.fromRGB(131, 181, 255),
-	["Textbox Highlight Color"] = Color3.fromRGB(184, 212, 255),
-	["Box Highlight Color"] = Color3.fromRGB(184, 212, 255),
+	["Textbox Highlight Color"] = Color3.fromRGB(171, 171, 255),
+	["Box Highlight Color"] = Color3.fromRGB(171, 171, 255),
 	["Slider Line Color"] = Color3.fromRGB(75, 75, 75),
 	["Slider Highlight Color"] = Color3.fromRGB(67, 94, 131),
 	["Tween Animation 1 Speed"] = DisableAnimation and 0 or 0.25,
@@ -383,7 +379,7 @@ local libCreateNoti = function(Setting)
 	local colorG = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-	TextLabelNoti.Text = "<font color=\"rgb(" .. color .. ")\">Crystal Hub</font> " .. getgenv().TitleNameNoti
+	TextLabelNoti.Text = "<font color=\"rgb(" .. color .. ")\">Nawy Hub</font> " .. getgenv().TitleNameNoti
 	
 	TextLabelNoti.Name = "TextLabelNoti"
 	TextLabelNoti.Parent = Topnoti
@@ -551,7 +547,10 @@ function Library:CreateWindow(Setting)
 	MainContainer.Parent = Main
 	MainContainer.BackgroundColor3 = getgenv().UIColor['Background Main Color']
 	MainContainer.Size = UDim2.new(1, 0, 1, 0)
-
+	-- MainContainer
+	local uistr = Instance.new("UIStroke", MainContainer);
+	uistr["Thickness"] = 2;
+	uistr["Color"] = Color3.fromRGB(171, 171, 255);
 	getgenv().ReadyForGuiLoaded = true
 	
 	MainCorner.CornerRadius = UDim.new(0, 4)
@@ -605,7 +604,7 @@ function Library:CreateWindow(Setting)
 	local colorG = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[2])
 	local colorB = tostring(Library_Function.Getcolor(getgenv().UIColor['Title Text Color'])[3])
 	local color = colorR .. ',' .. colorG .. ',' .. colorB
-	TextLabelMain.Text = "<font color=\"rgb(" .. color .. ")\">Crystal Hub</font> " .. getgenv().MainDesc
+	TextLabelMain.Text = "<font color=\"rgb(" .. color .. ")\">Nawy Hub</font> " .. getgenv().MainDesc
 
 	PageControl.Name = "Background1"
 	PageControl.Parent = Concacmain
@@ -2544,7 +2543,7 @@ function Library:CreateWindow(Setting)
 
 end
 
-Library.Notify({
+libCreateNoti({
 	Title = 'UI Library',
 	Desc = 'The UI automatically hides once executed.\nPress the button at the bottom-left of the screen to show the GUI.',
 	ShowTime = 10
