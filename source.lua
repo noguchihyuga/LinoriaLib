@@ -3744,9 +3744,11 @@ local offset = Vector2.new()
 
 parent.InputBegan:Connect(function(input)
 	if input.UserInputType == Enum.UserInputType.MouseButton1 then
-		dragging = true
-		local guiPosition = Vector2.new(parent.Position.X.Offset, parent.Position.Y.Offset)
-		offset = input.Position - guiPosition
+        dragging = true
+		pcall(function ()
+            local guiPosition = Vector2.new(parent.Position.X.Offset, parent.Position.Y.Offset)
+            offset = input.Position - guiPosition
+        end)
 	end
 end)
 
