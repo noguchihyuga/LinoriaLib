@@ -3682,6 +3682,129 @@ end;
 
 Players.PlayerAdded:Connect(OnPlayerChange);
 Players.PlayerRemoving:Connect(OnPlayerChange);
+-- ScreenGui
+pcall(function ()
+    game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui").noguchihyuga:Destroy()
+end)
+local n_screengui = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+n_screengui["ZIndexBehavior"] = Enum.ZIndexBehavior.Sibling;
+n_screengui.Name = "noguchihyuga"
+local n_thua = Instance.new("ImageLabel", n_screengui);
+n_thua["BorderSizePixel"] = 0;
+n_thua["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
 
+n_thua["AnchorPoint"] = Vector2.new(0.5, 0.5);
+n_thua["Image"] = [[rbxassetid://97686310103086]];
+n_thua["Size"] = UDim2.new(0, 70, 0, 70);
+n_thua["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+n_thua["BackgroundTransparency"] = 1;
+n_thua["Rotation"] = 33;
+n_thua["Name"] = [[thua]];
+n_thua["Position"] = UDim2.new(0.1, 0, 0.5, 0);
+
+
+-- StarterGui.ScreenGui.thua.a1
+local n_a1 = Instance.new("ImageLabel", n_thua);
+n_a1["BorderSizePixel"] = 0;
+n_a1["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+-- [ERROR] cannot convert ImageContent, please report to "https://github.com/uniquadev/GuiToLuaConverter/issues"
+n_a1["Image"] = [[rbxassetid://105680650406115]];
+n_a1["Size"] = UDim2.new(0, 70, 0, 70);
+n_a1["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+n_a1["BackgroundTransparency"] = 1;
+n_a1["Rotation"] = -13;
+n_a1["Name"] = [[a1]];
+n_a1["Position"] = UDim2.new(-0.15081, 0, 0.29657, 0);
+
+
+-- StarterGui.ScreenGui.thua.a2
+local n_a2 = Instance.new("ImageLabel", n_thua);
+n_a2["BorderSizePixel"] = 0;
+n_a2["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+-- [ERROR] cannot convert ImageContent, please report to "https://github.com/uniquadev/GuiToLuaConverter/issues"
+n_a2["Image"] = [[rbxassetid://119269492881240]];
+n_a2["Size"] = UDim2.new(0, 50, 0, 50);
+n_a2["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+n_a2["BackgroundTransparency"] = 1;
+n_a2["Rotation"] = -13;
+n_a2["Name"] = [[a2]];
+n_a2["Position"] = UDim2.new(-0.1, 0, 0.25, 0);
+
+
+
+-- StarterGui.ScreenGui.LocalScript
+local parent = n_screengui.thua
+local TweenService = game:GetService("TweenService")
+local a1 = n_screengui.thua.a1
+local a2 = n_screengui.thua.a2
+local istoggled = true
+local UIS = game:GetService("UserInputService")
+local dragging = false
+local offset = Vector2.new()
+
+parent.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = true
+		local guiPosition = Vector2.new(parent.Position.X.Offset, parent.Position.Y.Offset)
+		offset = input.Position - guiPosition
+	end
+end)
+
+UIS.InputChanged:Connect(function(input)
+	if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+		parent.Position = UDim2.fromOffset(input.Position.X - offset.X, input.Position.Y - offset.Y)
+		wait(0.3)
+	end
+end)
+
+UIS.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		dragging = false
+	end
+end)
+
+function thua(a)
+	if not a then
+		local TweenInfo_ = TweenInfo.new(0.5, Enum.EasingStyle.Linear)
+		spawn(function()
+			TweenService:Create(a1, TweenInfo_, {ImageTransparency = 1}):Play()
+		end)
+		spawn(function()
+			TweenService:Create(a2, TweenInfo_, {ImageTransparency = 1}):Play()
+		end)
+	else
+		local TweenInfo_ = TweenInfo.new(0.5, Enum.EasingStyle.Linear)
+		spawn(function()
+			TweenService:Create(a1, TweenInfo_, {ImageTransparency = 0}):Play()
+		end)
+		spawn(function()
+			TweenService:Create(a2, TweenInfo_, {ImageTransparency = 0}):Play()
+		end)
+	end
+end
+function thua1(a)
+	if not a then
+		local TweenInfo_ = TweenInfo.new(0.5, Enum.EasingStyle.Linear)
+		spawn(function()
+			TweenService:Create(parent, TweenInfo_, {Rotation = 0}):Play()
+		end)
+	else
+		local TweenInfo_ = TweenInfo.new(0.5, Enum.EasingStyle.Linear)
+		spawn(function()
+			TweenService:Create(parent, TweenInfo_, {Rotation = 33}):Play()
+		end)
+	end
+end
+
+parent.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 then
+		istoggled = not istoggled
+		thua(istoggled)
+		thua1(istoggled)
+        game:service('VirtualInputManager'):SendKeyEvent(true, "RightControl", false, game)
+        wait(0.5)
+        game:service('VirtualInputManager'):SendKeyEvent(false, "RightControl", false, game)
+	end
+end)
 getgenv().Library = Library
 return Library
