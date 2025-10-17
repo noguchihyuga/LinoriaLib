@@ -40,6 +40,7 @@ function lib:CreateWindow(...)
                 local data = hs:JSONDecode(readfile("noguchi/savesetting.json"))
                 if data[oldtext] ~= nil then
                     olddefault = data[oldtext]
+                    oldcallback(olddefault)
                 end
                 local Callback = function (v)
                     local data = hs:JSONDecode(readfile("noguchi/savesetting.json"))
@@ -72,6 +73,7 @@ function lib:CreateWindow(...)
                 local data = hs:JSONDecode(readfile("noguchi/savesetting.json"))
                 if data[oldtext] ~= nil then
                     olddefault = data[oldtext]
+                    oldcallback(olddefault)
                 end
                 local Callback = function (v)
                     local data = hs:JSONDecode(readfile("noguchi/savesetting.json"))
