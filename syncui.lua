@@ -61,7 +61,7 @@ function lib:CreateWindow(...)
             return grouplib
         end
         function TabLib:AddRightGroupbox(...)
-            local groupbox = tab:AddLeftGroupbox(...)
+            local groupbox = tab:AddRightGroupbox(...)
             local grouplib = {}
             function grouplib:AddToggle(Idk, Setting)
                 Setting = Setting or {}
