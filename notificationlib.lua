@@ -133,5 +133,4 @@ function alert(content_, dur)
 		end)
 	end
 end
-alert("ua")
-alert("ok")
+return alert
