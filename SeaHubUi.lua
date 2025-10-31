@@ -2544,30 +2544,4 @@ function Library:CreateWindow(Setting)
 	return Main_Function
 
 end
-
-libCreateNoti({
-	Title = 'UI Library',
-	Desc = 'The UI automatically hides once executed.\nPress the button at the bottom-left of the screen to show the GUI.',
-	ShowTime = 10
-}, true)
-
--- return Library
-local Window = Library:CreateWindow({
-	["Desc"] = "Nawy Hub"
-})
-
-local tab = Window:AddTab("Main Tab")
-local section = tab:AddLeftGroupbox("Main Farm")
-section:AddButton({
-	["Text"] = "abc",
-	["Func"] = function ()
-		print("true")
-	end
-})
-section:AddToggle("", {
-	Text = 'Auto Store Fruit',
-	Default = true,
-	Tooltip = 'store a fruit which is able to store',
-	Callback = function(Value)
-	end
-})
+return Library
