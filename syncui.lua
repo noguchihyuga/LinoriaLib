@@ -14,6 +14,9 @@ if ispc  and not getgenv().UseSeaUi then
 else
     Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/noguchihyuga/LinoriaLib/refs/heads/main/SeaHubUi.lua"))()
 end
+if not isfolder("noguchi") then
+	makefolder("noguchi")
+end
 if not isfile('noguchi/savesetting.json') then
     writefile("noguchi/savesetting.json", "{}")
 end
