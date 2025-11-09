@@ -1288,6 +1288,11 @@ function Library:CreateWindow(Setting)
 				Button.MouseButton1Down:Connect(function()
 					Callback()
 				end)
+                local f = {}
+                function f:SetTitle(vl)
+                    ButtonTitle.Text = vl
+                end
+                return f
 			end
 			function sectionFunction:AddLabel(text)
 				local Title = text
@@ -1328,7 +1333,7 @@ function Library:CreateWindow(Setting)
 				LabelTitle.TextColor3 = getgenv().UIColor["Text Color"]
 				LabelTitle.TextStrokeTransparency = getgenv().UIColor["Text Stroke Transparency"]
 				local labelFunction = {}
-				function labelFunction.SetText(text)
+				function labelFunction:SetText(text)
 					LabelTitle.Text = text
 				end
 				function labelFunction.SetColor(color)
